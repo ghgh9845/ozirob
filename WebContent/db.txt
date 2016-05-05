@@ -1,0 +1,27 @@
+alter table reply_table drop(board_idx);
+
+drop table board_table;
+
+create table BOARD_TABLE(
+BOARD_IDX number primary key,
+BOARD_KIND varchar2(100) not null,
+BOARD_SUB_KIND varchar2(100) not null,
+BOARD_TITLE varchar2(50) not null,
+BOARD_CONTENT varchar2(500) not null,
+BOARD_LIKE number default 0,
+BOARD_HATE number default 0,
+BOARD_WRITER varchar2(100) not null 
+references USER_TABLE(USER_MAIL)
+);
+
+
+ALTER TABLE REPLY_TABLE
+DROP CONSTRAINT BOARD_IDX;
+
+ALTER TABLE BOARD_TABLE
+DROP CONSTRAINT BOARD_IDX;
+
+create sequence BOARD_TABLE_SEQ
+start with 0
+minvalue 0
+increment by 1;
